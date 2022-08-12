@@ -1,0 +1,9 @@
+* force player to stand still when using scanner mayube
+* variable buffer size
+* other speed ups, maybe point generation code and such, still maybe dont do one element at a time etc
+* make the randomness equal to half the spread amount between eac hcell 
+* i dont like how sin cos makes the super scanner go over the area twice
+* superscan points end up more frequently on edges, prob due to math
+* since introducing the ability to do many points (not uploadSlow anymore) there is a bug where we go past the buffers index possiblity
+* think of new things to add
+* make it so that the camera can't look past walls
