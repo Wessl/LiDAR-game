@@ -16,6 +16,7 @@ public class LiDARShooter : MonoBehaviour
     public DrawCircles drawCirclesObj;
 
     private List<RaycastHit> hits = new List<RaycastHit>();
+    public PlayerController playerControllerRef;
     
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,8 @@ public class LiDARShooter : MonoBehaviour
 
     IEnumerator SuperScan()
     {
+        // disable player movement
+        playerControllerRef.CanMove = false;
         // lmao how the fuck did I figure all this out
         float aspect = mainCam.aspect;
         float magic = 1.75f;
@@ -64,6 +67,8 @@ public class LiDARShooter : MonoBehaviour
             drawCirclesObj.UploadCircleData(pointsHit.Item1, TagsToColors(pointsHit.Item2));     // It makes more sense to split these into two
             yield return null;
         }
+        // re-enable movement
+        playerControllerRef.CanMove = true;
     }
 
     void LiDAR()

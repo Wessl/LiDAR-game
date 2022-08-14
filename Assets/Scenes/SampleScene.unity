@@ -1161,6 +1161,7 @@ MonoBehaviour:
   lidarActivationKey: 116
   superScanKey: 121
   drawCirclesObj: {fileID: 963194230}
+  playerControllerRef: {fileID: 128983969}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0

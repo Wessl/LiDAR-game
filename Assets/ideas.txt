@@ -6,4 +6,3 @@
 * superscan points end up more frequently on edges, prob due to math
 * since introducing the ability to do many points (not uploadSlow anymore) there is a bug where we go past the buffers index possiblity
 * think of new things to add
-* make it so that the camera can't look past walls
