@@ -11,6 +11,7 @@ public class MouseLook : MonoBehaviour
 
     private float xRotation = 0f;
     public bool focusOnEnable = true; // whether or not to focus and lock cursor immediately on enable
+    public bool lookEnabled;
 
     
     static bool Focused {
@@ -22,6 +23,7 @@ public class MouseLook : MonoBehaviour
     }
     void OnEnable() {
         if( focusOnEnable ) Focused = true;
+        lookEnabled = true;
     }
 
     void OnDisable() => Focused = false;
@@ -33,7 +35,7 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         // Input
-        if( Focused )
+        if( Focused && lookEnabled )
             UpdateInput();
         else if( Input.GetMouseButtonDown( 0 ) )
             Focused = true;

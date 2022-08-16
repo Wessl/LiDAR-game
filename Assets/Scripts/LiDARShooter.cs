@@ -10,18 +10,24 @@ public class LiDARShooter : MonoBehaviour
 
     public float coneAngle;
     public float fireRate;
+    public float superScanMinTime = 1f;
     public int superScanSqrtNum = 200;
     public KeyCode lidarActivationKey;
     public KeyCode superScanKey = KeyCode.Y;
     public DrawCircles drawCirclesObj;
+    private float superScanWaitTime;
+    public AudioClip superScanSFX;
+    public AudioSource audioSource;
 
     private List<RaycastHit> hits = new List<RaycastHit>();
     public PlayerController playerControllerRef;
+    public MouseLook mouseLookRef;
     
     // Start is called before the first frame update
     void Start()
     {
         mainCam = Camera.main;
+        superScanWaitTime = 1 / (superScanSqrtNum / superScanMinTime);
     }
 
     // Update is called once per frame
@@ -39,8 +45,10 @@ public class LiDARShooter : MonoBehaviour
 
     IEnumerator SuperScan()
     {
-        // disable player movement
+        // disable player and camera movement 
         playerControllerRef.CanMove = false;
+        mouseLookRef.lookEnabled = false;
+        
         // lmao how the fuck did I figure all this out
         float aspect = mainCam.aspect;
         float magic = 1.75f;
@@ -50,12 +58,15 @@ public class LiDARShooter : MonoBehaviour
         var upDir =  mainCamGO.transform.up;
         var cameraPos = mainCam.transform.position;
         var cameraRay = (cameraPos + facingDir);
-        
+        // Activate Audio
+        audioSource.PlayOneShot(superScanSFX);
+        // Math
         var q = Vector3.Cross(facingDir.normalized, upDir.normalized);
         var r = Mathf.Tan(Mathf.Deg2Rad * (fov));
         Vector3[] pointsOnPlane = new Vector3[superScanSqrtNum];
         for (int i = 0; i < superScanSqrtNum; i++)
         {
+            var timeBefore = Time.time;
             var meta = i / (float)superScanSqrtNum * Mathf.PI ;
             for (int j = 0; j < superScanSqrtNum; j++)
             {
@@ -65,10 +76,12 @@ public class LiDARShooter : MonoBehaviour
             }
             Tuple<Vector3[],string[]> pointsHit = CheckRayIntersections(cameraPos, cameraRay-cameraPos, pointsOnPlane);
             drawCirclesObj.UploadCircleData(pointsHit.Item1, TagsToColors(pointsHit.Item2));     // It makes more sense to split these into two
-            yield return null;
+            var timePassed = Time.time - timeBefore;
+            yield return new WaitForSecondsRealtime(superScanWaitTime - timePassed);
         }
         // re-enable movement
         playerControllerRef.CanMove = true;
+        mouseLookRef.lookEnabled = true;
     }
 
     void LiDAR()
