@@ -18,11 +18,13 @@ public class Interactible : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     private float rotationTime;
     private bool isBusy;
+    private AudioSource audioSource;
 
     private void Start()
     {
         rotationTime = 1 / rotationSpeed;
         isBusy = false;
+        audioSource = GetComponent<AudioSource>();
     }
 
 
@@ -50,6 +52,7 @@ public class Interactible : MonoBehaviour
     {
         isBusy = true;
         float timePassed = 0;
+        audioSource.Play();
         while (timePassed < rotationTime)
         {
             transform.Rotate(interactionRotation * Time.deltaTime * rotationSpeed);
