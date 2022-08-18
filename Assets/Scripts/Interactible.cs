@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Interactible : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class Interactible : MonoBehaviour
     {
         Move,
         Destroy,
-        Rotate
+        Rotate,
+        Goal
         // More here in the future
     }
     [SerializeField] Interaction interactionType;       // Set this in inspector of each game object 
@@ -41,6 +43,12 @@ public class Interactible : MonoBehaviour
             case Interaction.Rotate:
                 StartCoroutine(RotateOverTime());
                 break;
+            case Interaction.Goal:
+                EnterGoal();
+                break;
+            case Interaction.Destroy:
+                DestroyInteractible();
+                break;
             default:
                 // nothing
                 break;
@@ -61,6 +69,16 @@ public class Interactible : MonoBehaviour
         }
 
         isBusy = false;
+    }
 
+    private void EnterGoal()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    private void DestroyInteractible()
+    {
+        // Also do other things first
+        Destroy(this.gameObject);
     }
 }

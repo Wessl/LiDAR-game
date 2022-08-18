@@ -115,6 +115,9 @@ public class LiDARShooter : MonoBehaviour
             if (tag == "Interactible")
             {
                 colors[i++] = new Vector3(0,1,0);
+            } else if (tag == "Goal")
+            {
+                colors[i++] = new Vector3(0.698f, 0.4f, 1f);
             }
             else
             {
