@@ -7,3 +7,4 @@
 * since introducing the ability to do many points (not uploadSlow anymore) there is a bug where we go past the buffers index possiblity
 * think of new things to add
 * disable camera movement during supeRSCAN
+* make shatter cube blender then implement here

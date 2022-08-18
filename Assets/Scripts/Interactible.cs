@@ -21,6 +21,8 @@ public class Interactible : MonoBehaviour
     private float rotationTime;
     private bool isBusy;
     private AudioSource audioSource;
+    public AudioClip doorOpeningSound;
+    public AudioClip destroySound;
 
     private void Start()
     {
@@ -60,6 +62,7 @@ public class Interactible : MonoBehaviour
     {
         isBusy = true;
         float timePassed = 0;
+        audioSource.clip = doorOpeningSound;
         audioSource.Play();
         while (timePassed < rotationTime)
         {
@@ -79,6 +82,9 @@ public class Interactible : MonoBehaviour
     private void DestroyInteractible()
     {
         // Also do other things first
-        Destroy(this.gameObject);
+        audioSource.clip = destroySound;
+        audioSource.Play();
+        // instead of destroying, shatter into cubes! do something in blender idk
+        // Destroy(this.gameObject);
     }
 }
