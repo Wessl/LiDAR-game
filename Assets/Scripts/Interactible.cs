@@ -24,6 +24,7 @@ public class Interactible : MonoBehaviour
     public AudioClip doorOpeningSound;
     public AudioClip destroySound;
     public GameObject destroyedMesh;
+    public GameObject tempAudioPlayer;
 
     private void Start()
     {
@@ -83,8 +84,12 @@ public class Interactible : MonoBehaviour
     private void DestroyInteractible()
     {
         // Also do other things first
-        audioSource.clip = destroySound;
-        audioSource.Play();
+        var tempAudio = Instantiate(tempAudioPlayer, transform.position, Quaternion.identity);
+        var tempAS = tempAudio.GetComponent<AudioSource>();
+        var length = destroySound.length;
+        tempAS.clip = destroySound;
+        tempAS.Play();
+        Destroy(tempAS, length);
         // instead of destroying, shatter into cubes! do something in blender idk
         var destroyedGO = Instantiate(destroyedMesh, transform.position, transform.rotation);
         foreach (var meshChild in destroyedGO.GetComponentsInChildren<MeshCollider>())
@@ -92,6 +97,7 @@ public class Interactible : MonoBehaviour
             meshChild.transform.localScale = this.transform.localScale;
         }
         Debug.Log(destroyedGO.name);
+        
         DestroyImmediate(gameObject);
         Physics.SyncTransforms();
         // Destroy(this.gameObject);
