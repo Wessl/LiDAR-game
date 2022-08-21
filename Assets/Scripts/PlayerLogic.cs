@@ -27,7 +27,6 @@ public class PlayerLogic : MonoBehaviour
                 foreach (var hitCollider in hitInteractionColliders)
                 {
                     inRangeInteractible = hitCollider.GetComponent<Interactible>();
-                    Debug.Log(hitCollider.name);
                 }
             }
             else
