@@ -36,6 +36,7 @@ public class Interactible : MonoBehaviour
         rotationTime = 1 / rotationSpeed;
         isBusy = false;
         audioSource = GetComponent<AudioSource>();
+        if (transition != null) transition.gameObject.SetActive(true);
     }
 
 

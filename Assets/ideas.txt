@@ -6,8 +6,6 @@
 * superscan points end up more frequently on edges, prob due to math
 * since introducing the ability to do many points (not uploadSlow anymore) there is a bug where we go past the buffers index possiblity
 * think of new things to add
-* disable camera movement during supeRSCAN
-* make shatter cube blender then implement here
 start out as horror-puzzle. eventually unlock the outside, where colors of points match the objects, paint and see beautiful worlds as your reward
 as for the horror aspects, when you scan enough of a "red", instantly more points are unlocked on the body a loud sound should play
 * think about making the player move with physics instead... pro: makes it easier to move thru destroyed blocks, cons it makes it harder to see with lidar since old points will litter scene more
