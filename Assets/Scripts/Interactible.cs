@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class Interactible : MonoBehaviour
 {
+    public Animator transition;
+    public float transitionTime = 1f;
+    
     enum Interaction
     {
         Move,
@@ -23,8 +26,10 @@ public class Interactible : MonoBehaviour
     private AudioSource audioSource;
     public AudioClip doorOpeningSound;
     public AudioClip destroySound;
+    public AudioClip winSound;
     public GameObject destroyedMesh;
     public GameObject tempAudioPlayer;
+    
 
     private void Start()
     {
@@ -48,7 +53,7 @@ public class Interactible : MonoBehaviour
                 StartCoroutine(RotateOverTime());
                 break;
             case Interaction.Goal:
-                EnterGoal();
+                StartCoroutine(EnterGoal());
                 break;
             case Interaction.Destroy:
                 DestroyInteractible();
@@ -76,8 +81,17 @@ public class Interactible : MonoBehaviour
         isBusy = false;
     }
 
-    private void EnterGoal()
+    IEnumerator EnterGoal()
     {
+        // Play sound
+        var persistentAudio = GameObject.FindObjectOfType<PersistentAudio>().GetComponent<AudioSource>();
+        persistentAudio.clip = winSound;
+        persistentAudio.Play();
+        // Play animation
+        transition.SetTrigger("Start");
+        // Wait
+        yield return new WaitForSeconds(transitionTime);
+        // Load scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
