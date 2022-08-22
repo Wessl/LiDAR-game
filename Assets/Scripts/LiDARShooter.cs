@@ -112,23 +112,29 @@ public class LiDARShooter : MonoBehaviour
         int i = 0;
         foreach (var tag in tags)
         {
-            if (tag == "Interactible")
+            switch (tag)
             {
-                colors[i++] = new Vector3(0,1,0);
-            } else if (tag == "Goal")
-            {
-                colors[i++] = new Vector3(0.698f, 0.4f, 1f);
-            }
-            else
-            {
-                colors[i++] = new Vector3(1, 1, 1);
+                case "Untagged":
+                    colors[i++] = new Vector3(1, 1, 1);
+                    break;
+                case "Interactible":
+                    colors[i++] = new Vector3(0, 1, 0);
+                    break;
+                case "Goal":
+                    colors[i++] = new Vector3(0.698f, 0.4f, 1f);
+                    break;
+                case "Enemy":
+                    colors[i++] = new Vector3(0.533f, 0.031f, 0.031f);
+                    break;
+                default:
+                    colors[i++] = new Vector3(0.5f,0.4f,0.3f);
+                    break;
             }
         }
-
         return colors;
     }
 
-    
+
     private Tuple<Vector3[],String[]> CheckRayIntersections(Vector3 cameraPos, Vector3 cameraRay, Vector3[] points)
     {
         Vector3[] pointsHit = new Vector3[points.Length];

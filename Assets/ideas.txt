@@ -9,3 +9,5 @@
 start out as horror-puzzle. eventually unlock the outside, where colors of points match the objects, paint and see beautiful worlds as your reward
 as for the horror aspects, when you scan enough of a "red", instantly more points are unlocked on the body a loud sound should play
 * think about making the player move with physics instead... pro: makes it easier to move thru destroyed blocks, cons it makes it harder to see with lidar since old points will litter scene more
+for village level: door into house, to unlock something outsie, which leads to a drop down tunnel, go down, there is a room, wet water drops
+add footsteps sounds, depending on surface type
