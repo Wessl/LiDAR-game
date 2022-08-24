@@ -11,3 +11,4 @@ as for the horror aspects, when you scan enough of a "red", instantly more point
 * think about making the player move with physics instead... pro: makes it easier to move thru destroyed blocks, cons it makes it harder to see with lidar since old points will litter scene more
 for village level: door into house, to unlock something outsie, which leads to a drop down tunnel, go down, there is a room, wet water drops
 add footsteps sounds, depending on surface type
+omg, if I call drawCircles UploadCircleData from two different places... they can overwrite each other. fuck

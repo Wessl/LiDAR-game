@@ -22,6 +22,12 @@ public class LiDARShooter : MonoBehaviour
     private List<RaycastHit> hits = new List<RaycastHit>();
     public PlayerController playerControllerRef;
     public MouseLook mouseLookRef;
+    private int enemyHitAmount = 0;
+    [SerializeField] private int enemyHitAmountTriggerThreshold = 30;
+    
+    // Event for alerting enemies when applicable
+    public delegate void EnemyAction();
+    public static event EnemyAction OnThresholdReached;
     
     // Start is called before the first frame update
     void Start()
@@ -40,6 +46,14 @@ public class LiDARShooter : MonoBehaviour
         else if (Input.GetKey(lidarActivationKey))
         {
             LiDAR();
+        }
+
+        if (enemyHitAmount > enemyHitAmountTriggerThreshold)
+        {
+            if (OnThresholdReached != null)
+            {
+                OnThresholdReached();
+            }
         }
     }
 
@@ -124,7 +138,8 @@ public class LiDARShooter : MonoBehaviour
                     colors[i++] = new Vector3(0.698f, 0.4f, 1f);
                     break;
                 case "Enemy":
-                    colors[i++] = new Vector3(0.533f, 0.031f, 0.031f);
+                    colors[i++] = new Vector3(0.733f, 0.031f, 0.031f);
+                    enemyHitAmount++;
                     break;
                 default:
                     colors[i++] = new Vector3(0.5f,0.4f,0.3f);
