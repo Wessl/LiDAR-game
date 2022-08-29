@@ -32,11 +32,13 @@ public class ZombieEnemy : MonoBehaviour
         foreach (var meshRenderer in allMeshRenderers)
         {
             var go = meshRenderer.gameObject;
-            Mesh zombieMesh = meshRenderer.sharedMesh;
-            foreach (var vertex in zombieMesh.vertices)
-            {
+            Mesh bakedMesh = new Mesh();
+            meshRenderer.BakeMesh(bakedMesh, true);
+            Matrix4x4 localToWorld = transform.localToWorldMatrix;
+            for(int i = 0; i< bakedMesh.vertices.Length; ++i){
+                Vector3 world_v = localToWorld.MultiplyPoint3x4(bakedMesh.vertices[i]);    // get the real time world pos
                 colors.Add(new Vector3(0.733f, 0.031f, 0.031f));
-                vertices.Add(transform.TransformPoint(vertex));
+                vertices.Add(world_v);
             }
         }
         // Now get a reference to the object that actually handles drawing points
