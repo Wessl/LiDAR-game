@@ -22,6 +22,11 @@ public class ZombieEnemy : MonoBehaviour
         LiDARShooter.OnThresholdReached -= Act;     // unsubscribe ourselves since we olnly want this occur once
 
         CreatePointsOnMesh();
+        
+        // Remove zombie from world right after...?
+        Destroy(gameObject);
+        
+        // activate 3d sound source somewhere...?
     }
 
     private void CreatePointsOnMesh()
