@@ -23,10 +23,19 @@ public class PlayerLogic : MonoBehaviour
             Collider[] hitInteractionColliders = Physics.OverlapSphere(transform.position, interactionRange, interactionLayerMask);
             if (hitInteractionColliders.Length != 0)
             {
-                interactionTooltip.SetActive(true);
+                // We got something - great! Now do a raycast to confirm if it's "visible". 
+                RaycastHit hit;
                 foreach (var hitCollider in hitInteractionColliders)
                 {
-                    inRangeInteractible = hitCollider.GetComponent<Interactible>();
+                    var hitTransform = hitCollider.transform;
+                    Vector3 direction = hitTransform.position - transform.position;
+                    Physics.Raycast(transform.position, direction, out hit);
+                    if (hit.collider == hitCollider)
+                    {
+                        // If the collider we hit with the raycast is the same as with the overlapsphere, there is nothing in line of sight
+                        interactionTooltip.SetActive(true);
+                        inRangeInteractible = hitCollider.GetComponent<Interactible>();
+                    }
                 }
             }
             else
