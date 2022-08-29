@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ZombieEnemy : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource; 
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private GameObject activateAfterGO;
     private void OnEnable()
     {
         LiDARShooter.OnThresholdReached += Act;
@@ -27,6 +28,7 @@ public class ZombieEnemy : MonoBehaviour
         Destroy(gameObject);
         
         // activate 3d sound source somewhere...?
+        activateAfterGO.SetActive(true);
     }
 
     private void CreatePointsOnMesh()
@@ -46,7 +48,7 @@ public class ZombieEnemy : MonoBehaviour
                 vertices.Add(world_v);
             }
         }
-        // Now get a reference to the object that actually handles drawing points
+        // Get a reference to the object that actually handles drawing points
         DrawCircles drawCircles = GameObject.FindObjectOfType<DrawCircles>();
         drawCircles.UploadCircleData(vertices.ToArray(), colors.ToArray());
     }
