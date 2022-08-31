@@ -33,23 +33,26 @@ public class ZombieEnemy : MonoBehaviour
 
     private void CreatePointsOnMesh()
     {
-        List<Vector3> vertices = new List<Vector3>();
-        List<Vector3> colors = new List<Vector3>();
+        DrawCircles drawCircles = GameObject.FindObjectOfType<DrawCircles>();
+
+        
         var allMeshRenderers = gameObject.transform.GetComponentsInChildren<SkinnedMeshRenderer>();
         foreach (var meshRenderer in allMeshRenderers)
         {
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector3> colors = new List<Vector3>();
+
             var go = meshRenderer.gameObject;
             Mesh bakedMesh = new Mesh();
             meshRenderer.BakeMesh(bakedMesh, true);
             Matrix4x4 localToWorld = transform.localToWorldMatrix;
-            for(int i = 0; i< bakedMesh.vertices.Length; ++i){
+            for(int i = 0; i< bakedMesh.vertices.Length; i++){
                 Vector3 world_v = localToWorld.MultiplyPoint3x4(bakedMesh.vertices[i]);    // get the real time world pos
                 colors.Add(new Vector3(0.733f, 0.031f, 0.031f));
                 vertices.Add(world_v);
             }
+            drawCircles.UploadCircleData(vertices.ToArray(), colors.ToArray());    
         }
-        // Get a reference to the object that actually handles drawing points
-        DrawCircles drawCircles = GameObject.FindObjectOfType<DrawCircles>();
-        drawCircles.UploadCircleData(vertices.ToArray(), colors.ToArray());
+        
     }
 }

@@ -14,49 +14,26 @@ public class DrawCircles : MonoBehaviour
     private bool _canStartRendering;
     private ComputeBuffer _posBuffer;
     private ComputeBuffer _colorBuffer;
-    private Vector4[] _color;
-    private List<Vector3> _circlePositions = new List<Vector3>();
-    private Vector3[] _prevCirclePos;
-    private int computeBufferCount = 1048576; // 2^20
+    private int computeBufferCount = 1048576; // 2^20. 3*4*1048576 = 12MB which is... nothing. still, buffers are seemingly routed through l2 cache which is smaller than 12MB, sometimes.. (actually idk, would love to find out)§
 
     private void Awake()
     {
         _material = new Material(shader);
         _canStartRendering = false;
-        _prevCirclePos = Array.Empty<Vector3>();
-        int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));
-        _posBuffer = new ComputeBuffer (computeBufferCount, stride, ComputeBufferType.Append);
-        _colorBuffer = new ComputeBuffer(computeBufferCount, stride, ComputeBufferType.Append);
+        int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3));    // .. its 12 bytes. 3 floats. 
+        _posBuffer = new ComputeBuffer (computeBufferCount, stride, ComputeBufferType.Default);
+        _colorBuffer = new ComputeBuffer(computeBufferCount, stride, ComputeBufferType.Default);
     }
 
-    public void UploadCircleDataSlow(Vector3 circlePos)
-    {
-        // _posBuffer?.Release();
-
-        // This is not particularly efficient, we are setting buffer data for every single circle
-        _bufIndex++;
-        
-        Vector3[] singleArr = new Vector3[] {circlePos};
-        _posBuffer.SetData (singleArr, 0, _bufIndex % computeBufferCount, 1);
-        
-        _color = new Vector4[1];
-        _color[0] = new Vector4(0.5f, 0.4f, 0.9f, 1f);  // TODO: Make this depend on the thing you hit
-        _material.SetBuffer ("posbuffer", _posBuffer);
-        
-        _canStartRendering = true;
-        
-    }
-    
     public void UploadCircleData(Vector3[] circlePositions, Vector3[] colors)
     {
         var amount = circlePositions.Length;
         _bufIndex += amount;
-
         _posBuffer.SetData (circlePositions, 0, _bufIndex % computeBufferCount, amount);
         _colorBuffer.SetData(colors, 0, _bufIndex % computeBufferCount, amount);
-        _material.SetBuffer ("posbuffer", _posBuffer);
+        // _material.SetBuffer ("posbuffer", _posBuffer);
+        // _material.SetBuffer("colorbuffer", _colorBuffer);
         _canStartRendering = true;
-        
     }
     
     void OnRenderObject()
