@@ -30,8 +30,14 @@ public class ZombieEnemy : MonoBehaviour
         _audioSource.Play();    // Zombie argharhh sound
         LiDARShooter.OnThresholdReached -= Act;     // unsubscribe ourselves since we only want this occur once
 
-        CreatePointsOnMesh();
         
+        // Remove other points?
+        DrawCircles drawCircles = GameObject.FindObjectOfType<DrawCircles>();
+        drawCircles.ResetBuffers();
+        
+        // Create points on the zombie mesh instantlty
+        CreatePointsOnMesh();
+
         // Remove zombie from world right after...?
         // Destroy(gameObject);
         

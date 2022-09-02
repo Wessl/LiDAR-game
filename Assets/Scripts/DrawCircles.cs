@@ -25,6 +25,16 @@ public class DrawCircles : MonoBehaviour
         _colorBuffer = new ComputeBuffer(computeBufferCount, stride, ComputeBufferType.Default);
     }
 
+    public void ResetBuffers()
+    {
+        int stride = System.Runtime.InteropServices.Marshal.SizeOf(typeof(Vector3)); 
+        _posBuffer.Release();
+        _colorBuffer.Release();
+        _posBuffer = new ComputeBuffer (computeBufferCount, stride, ComputeBufferType.Default);
+        _colorBuffer = new ComputeBuffer(computeBufferCount, stride, ComputeBufferType.Default);
+        _bufIndex = 0;
+    }
+
     public void UploadCircleData(Vector3[] circlePositions, Vector3[] colors)
     {
         var amount = circlePositions.Length;

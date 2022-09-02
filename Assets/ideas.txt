@@ -13,3 +13,6 @@ for village level: door into house, to unlock something outsie, which leads to a
 add footsteps sounds, depending on surface type
 omg, if I call drawCircles UploadCircleData from two different places... they can overwrite each other. fuck
 zombie sound gets overriden somehow when doing scan
+
+maybe temporarily disable the scanner after having destroyed other points
+do something with the camera lens too 
