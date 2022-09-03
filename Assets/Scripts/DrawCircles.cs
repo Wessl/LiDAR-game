@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class DrawCircles : MonoBehaviour
 {
@@ -44,6 +45,22 @@ public class DrawCircles : MonoBehaviour
         // _material.SetBuffer ("posbuffer", _posBuffer);
         // _material.SetBuffer("colorbuffer", _colorBuffer);
         _canStartRendering = true;
+    }
+    
+    public void JigglePoints()
+    { // very expensive method most likely - maybe possible to speed up?
+        // It would be really cool if this happened in tune with some music
+        var posData = new Vector3[_bufIndex];
+        var colorData = new Vector3[_bufIndex];
+        _posBuffer.GetData(posData);
+        // _colorBuffer.GetData(colorData);
+        Vector3 affection = new Vector3(0, Random.Range(-0.05f,0.01f),0);
+        for (int i = 0; i < _bufIndex; i++)
+        {
+            // Find out some fun way of actually doing this. Is it more fun to have them fall down, or vibrate, or something else?
+            posData[i] += affection;
+        }
+        _posBuffer.SetData(posData, 0, 0, _bufIndex);
     }
     
     void OnRenderObject()
