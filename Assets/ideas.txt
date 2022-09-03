@@ -16,3 +16,4 @@ zombie sound gets overriden somehow when doing scan
 
 maybe temporarily disable the scanner after having destroyed other points
 do something with the camera lens too 
+points moving around in space somewhát?= crazy shader effects(prefereably in the next level, dont do everything at on´ce)

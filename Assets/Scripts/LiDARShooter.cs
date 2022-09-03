@@ -24,6 +24,7 @@ public class LiDARShooter : MonoBehaviour
     public MouseLook mouseLookRef;
     private int enemyHitAmount = 0;
     [SerializeField] private int enemyHitAmountTriggerThreshold = 30;
+    private bool disabled;
     
     // Event for alerting enemies when applicable
     public delegate void EnemyAction();
@@ -34,11 +35,13 @@ public class LiDARShooter : MonoBehaviour
     {
         mainCam = Camera.main;
         superScanWaitTime = 1 / (superScanSqrtNum / superScanMinTime);
+        disabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (disabled) return;
         if (Input.GetKeyDown(superScanKey))
         {
             StartCoroutine(SuperScan());
@@ -218,5 +221,19 @@ public class LiDARShooter : MonoBehaviour
         perp[axisMax] = cameraRay[midIndex];
         perp[midIndex] = -max;
         return perp.normalized;
+    }
+
+    public void DisableForSeconds(float seconds)
+    {
+        disabled = true;
+        Debug.Log("ball");
+        StartCoroutine(Disabler(seconds));
+    }
+
+    IEnumerator Disabler(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+        Debug.Log("sack");
+        disabled = false;
     }
 }

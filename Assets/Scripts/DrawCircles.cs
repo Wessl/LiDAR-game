@@ -50,11 +50,16 @@ public class DrawCircles : MonoBehaviour
     {
         if (_canStartRendering)
         {
-            _material.SetPass(0);
-            _material.SetBuffer ("posbuffer", _posBuffer);
-            _material.SetBuffer("colorbuffer", _colorBuffer);
-            Graphics.DrawProceduralNow(MeshTopology.Points, _posBuffer.count, 1);
+            RenderPointsNow();
         }
+    }
+
+    public void RenderPointsNow()
+    {
+        _material.SetPass(0);
+        _material.SetBuffer ("posbuffer", _posBuffer);
+        _material.SetBuffer("colorbuffer", _colorBuffer);
+        Graphics.DrawProceduralNow(MeshTopology.Points, _posBuffer.count, 1);
     }
     void OnDestroy()
     {

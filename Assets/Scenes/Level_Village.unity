@@ -6385,6 +6385,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878851, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878852, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: field of view
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878852, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_GateFitMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878852, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_projectionMatrixMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878852, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4544517041792878852, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
+      propertyPath: m_NormalizedViewPortRect.width
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60ad40ac8fc7ca6448ef783d6bdbbe65, type: 3}
 --- !u!1001 &737206809

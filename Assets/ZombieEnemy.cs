@@ -7,12 +7,16 @@ public class ZombieEnemy : MonoBehaviour
 {
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameObject activateAfterGO;
+    [SerializeField] private float activeSec = 4f;
     private AudioSource activateAfterAS;
+    
     private float t = 0;
+    Camera cam;
 
     private void Start()
     {
         _audioSource.volume = 0f;
+        cam = Camera.main;
     }
 
     private void OnEnable()
@@ -44,14 +48,25 @@ public class ZombieEnemy : MonoBehaviour
         // activate 3d sound source somewhere...?
         activateAfterGO.SetActive(true);
         activateAfterAS = activateAfterGO.GetComponent<AudioSource>();
+        
+        // Disable the lidar shooter briefly
+        GameObject.FindObjectOfType<LiDARShooter>().DisableForSeconds(activeSec);
     }
+
+
 
     private void Update()
     {
         if (activateAfterGO.activeSelf)
         {
-            t += 0.25f * Time.deltaTime;
+            // Slowly activate audio source
+            t += 1 / activeSec * Time.deltaTime;
             activateAfterAS.volume = Mathf.Lerp(0, 0.8f, t);
+
+            // Camera
+            cam.fieldOfView = Mathf.SmoothStep(170, 60, t);
+            cam.rect = new Rect( Vector2.zero ,
+                new Vector2(Mathf.SmoothStep(0, 1, t*2),1));
         }
     }
 
@@ -74,7 +89,8 @@ public class ZombieEnemy : MonoBehaviour
                 colors.Add(new Vector3(0.733f, 0.031f, 0.031f));
                 vertices.Add(world_v);
             }
-            drawCircles.UploadCircleData(vertices.ToArray(), colors.ToArray());    
+            drawCircles.UploadCircleData(vertices.ToArray(), colors.ToArray());
         }
+        drawCircles.RenderPointsNow();
     }
 }
