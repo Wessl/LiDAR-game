@@ -144,6 +144,9 @@ public class LiDARShooter : MonoBehaviour
                     colors[i++] = new Vector3(0.733f, 0.031f, 0.031f);
                     enemyHitAmount++;
                     break;
+                case "Wood":
+                    colors[i++] = new Vector3(165/255f, 42/255f, 42/255f);
+                    break;
                 default:
                     colors[i++] = new Vector3(0.5f,0.4f,0.3f);
                     break;
