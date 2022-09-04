@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EdoMan : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    //[SerializeField] private AudioSource _audioSource;
     [SerializeField] private GameObject activateAfterGO;
     [SerializeField] private float activeSec = 4f;
     private AudioSource activateAfterAS;
@@ -17,10 +17,11 @@ public class EdoMan : MonoBehaviour
 
     private void Start()
     {
-        _audioSource.volume = 0f;
+        // _audioSource.volume = 0f;
         cam = Camera.main;
         drawCircles = GameObject.FindObjectOfType<DrawCircles>();
         activated = false;
+        GameObject.FindObjectOfType<LiDARShooter>().enemyHitAmountTriggerThreshold = 1000;
     }
 
     private void OnEnable()
@@ -36,7 +37,7 @@ public class EdoMan : MonoBehaviour
     void Act()
     {
         Debug.Log("somefin happen");
-        _audioSource.Play();    // PLay some sound
+        //_audioSource.Play();    // PLay some sound
         LiDARShooter.OnThresholdReached -= Act;     // unsubscribe ourselves since we only want this occur once
         activated = true;
 

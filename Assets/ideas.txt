@@ -18,4 +18,6 @@ maybe temporarily disable the scanner after having destroyed other points
 do something with the camera lens too 
 points moving around in space somewhát?= crazy shader effects(prefereably in the next level, dont do everything at on´ce)
 
-make the court level be orthograhpic. 
+make the court level be orthograhpic. (or not, maybe after, or not) 
+just remember to make the court room activate differently, right now the zombie thing is just a temp
+court room again, should be harder to activate, but once it does, a tunnel should open up behind the elevated thing... and since it's a tunnel... you can use the kiki song. 

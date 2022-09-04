@@ -22,8 +22,8 @@ public class LiDARShooter : MonoBehaviour
     private List<RaycastHit> hits = new List<RaycastHit>();
     public PlayerController playerControllerRef;
     public MouseLook mouseLookRef;
-    private int enemyHitAmount = 0;
-    [SerializeField] private int enemyHitAmountTriggerThreshold = 30;
+    private int activatorHitAmount = 0;
+    public int enemyHitAmountTriggerThreshold = 30;
     private bool disabled;
     
     // Event for alerting enemies when applicable
@@ -51,7 +51,7 @@ public class LiDARShooter : MonoBehaviour
             LiDAR();
         }
 
-        if (enemyHitAmount > enemyHitAmountTriggerThreshold)
+        if (activatorHitAmount > enemyHitAmountTriggerThreshold)
         {
             if (OnThresholdReached != null)
             {
@@ -142,10 +142,20 @@ public class LiDARShooter : MonoBehaviour
                     break;
                 case "Enemy":
                     colors[i++] = new Vector3(0.733f, 0.031f, 0.031f);
-                    enemyHitAmount++;
+                    activatorHitAmount++;
                     break;
                 case "Wood":
                     colors[i++] = new Vector3(165/255f, 42/255f, 42/255f);
+                    break;
+                case "WashitsuWall":
+                    colors[i++] = new Vector3(228 / 255f, 186 / 255f, 65 / 255f);
+                    break;
+                case "Tatami":
+                    colors[i++] = new Vector3(68/255f, 48/255f, 24/255f);
+                    break;
+                case "Kanji":
+                    colors[i++] = new Vector3(0f, 0f, 0);
+                    activatorHitAmount++;
                     break;
                 default:
                     colors[i++] = new Vector3(0.5f,0.4f,0.3f);

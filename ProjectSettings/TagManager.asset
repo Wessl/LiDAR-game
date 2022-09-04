@@ -8,6 +8,9 @@ TagManager:
   - Goal
   - Enemy
   - Wood
+  - WashitsuWall
+  - Tatami
+  - Kanji
   layers:
   - Default
   - TransparentFX
