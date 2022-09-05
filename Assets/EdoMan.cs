@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EdoMan : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioSource[] _audioSources;
     [SerializeField] private GameObject activateAfterGO;
     [SerializeField] private float activeSec = 4f;
-    private AudioSource activateAfterAS;
+    private AudioSource[] activateAfterAS;
     private bool activated;
     private DrawCircles drawCircles;
     public GameObject backWall;
@@ -18,7 +19,7 @@ public class EdoMan : MonoBehaviour
 
     private void Start()
     {
-        _audioSource.volume = 0f;
+        SetASVol(_audioSources, 0);
         cam = Camera.main;
         drawCircles = GameObject.FindObjectOfType<DrawCircles>();
         activated = false;
@@ -38,7 +39,7 @@ public class EdoMan : MonoBehaviour
     void Act()
     {
         Debug.Log("somefin happen");
-        _audioSource.Play();    // PLay some sound
+        _audioSources.ToList().ForEach(o => o.Play());    // PLay some sound
         LiDARShooter.OnThresholdReached -= Act;     // unsubscribe ourselves since we only want this occur once
         activated = true;
         
@@ -60,7 +61,7 @@ public class EdoMan : MonoBehaviour
         if (activated)
         {
             t += 1 / activeSec * Time.deltaTime;
-            _audioSource.volume = Mathf.Lerp(0, 0.8f, t);
+            SetASVol(_audioSources, Mathf.Lerp(0, 0.8f, t));
             // Make the points jiggle around a little
             drawCircles.JigglePoints();
             // Have the back wall move down
@@ -69,9 +70,17 @@ public class EdoMan : MonoBehaviour
             // turn off activation...
             if (t >= 0.98)
             {
+                drawCircles.ResetBuffers();
                 activated = false;
             }
         }
-        
+    }
+
+    private void SetASVol(AudioSource[] ass, float vol)
+    {
+        foreach (var audioSource in ass)
+        {
+            audioSource.volume = vol;
+        }
     }
 }
