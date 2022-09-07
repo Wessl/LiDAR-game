@@ -22,6 +22,7 @@ public class Interactible : MonoBehaviour
     [SerializeField] private Vector3 interactionRotation;
     [SerializeField] private float rotationSpeed;
     private float rotationTime;
+    [SerializeField] private float timesRotated = 1;
     private bool isBusy;
     private AudioSource audioSource;
     public AudioClip doorOpeningSound;
@@ -79,6 +80,9 @@ public class Interactible : MonoBehaviour
             yield return null;
         }
 
+        timesRotated++;
+        transform.localRotation = Quaternion.Euler(new Vector3(Mathf.Repeat(interactionRotation.x * timesRotated, 360),
+            Mathf.Repeat(interactionRotation.y * timesRotated, 360),Mathf.Repeat(interactionRotation.z * timesRotated, 360)));
         isBusy = false;
     }
 

@@ -388,13 +388,14 @@ MonoBehaviour:
   fireRate: 1500
   superScanMinTime: 1
   superScanSqrtNum: 160
-  lidarActivationKey: 116
-  superScanKey: 121
+  lidarActivationKey: 323
+  superScanKey: 325
   drawCirclesObj: {fileID: 4544517041792878849}
   superScanSFX: {fileID: 8300000, guid: 193bb3ab8f2d9fc48881193db1e25cca, type: 3}
   audioSource: {fileID: 4544517041278617567}
   playerControllerRef: {fileID: 4544517041278617558}
   mouseLookRef: {fileID: 4544517041792878863}
+  enemyHitAmountTriggerThreshold: 30
 --- !u!114 &4544517041792878849
 MonoBehaviour:
   m_ObjectHideFlags: 0

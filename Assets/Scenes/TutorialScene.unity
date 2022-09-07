@@ -238,6 +238,7 @@ MonoBehaviour:
   interactionMovement: {x: 1, y: 1, z: 1}
   interactionRotation: {x: 0, y: 90, z: 0}
   rotationSpeed: 2
+  timesRotated: 1
   doorOpeningSound: {fileID: 8300000, guid: 76bd47ba051a1fa408a20181d7845105, type: 3}
   destroySound: {fileID: 0}
   winSound: {fileID: 0}
@@ -1405,6 +1406,7 @@ MonoBehaviour:
   interactionMovement: {x: 1, y: 1, z: 1}
   interactionRotation: {x: 0, y: 90, z: 0}
   rotationSpeed: 2
+  timesRotated: 0
   doorOpeningSound: {fileID: 8300000, guid: 76bd47ba051a1fa408a20181d7845105, type: 3}
   destroySound: {fileID: 8300000, guid: 8b38f3afd19e26a4da5207b772bed449, type: 3}
   winSound: {fileID: 0}
@@ -1940,6 +1942,7 @@ MonoBehaviour:
   interactionMovement: {x: 1, y: 1, z: 1}
   interactionRotation: {x: 0, y: 90, z: 0}
   rotationSpeed: 2
+  timesRotated: 0
   doorOpeningSound: {fileID: 0}
   destroySound: {fileID: 0}
   winSound: {fileID: 8300000, guid: 0143b3d24cf486d499cda58c04247622, type: 3}
