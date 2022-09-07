@@ -25,4 +25,5 @@ when you leave the room into the tunnel, door behind you should close
 turn off sounds when going to next level
 tunnel should be long, but kept visually interesting somehow. audiosources should replenish along the way.
 AUDIOsources should also have a more interesting source than... nothing 
-instead of just resetting everything... make the points fly away or something, then reset calmly over time... or something
+instead of just resetting everything... make the points fly away or something, then reset calmly over time... right now im doing color fading to black. which is great, but like. could be improved I think
+idk man just keep at it

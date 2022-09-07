@@ -63,9 +63,12 @@ public class EdoMan : MonoBehaviour
             t += 1 / activeSec * Time.deltaTime;
             SetASVol(_audioSources, Mathf.Lerp(0, 0.8f, t));
             // Make the points jiggle around a little
-            drawCircles.JigglePoints();
+            drawCircles.JigglePoints(t);
             // Have the back wall move down
             backWall.transform.position = Vector3.Lerp(Vector3.zero, Vector3.down*4, t);
+
+            // start removing the color
+            drawCircles.SetColor(t);
             
             // turn off activation...
             if (t >= 0.98)

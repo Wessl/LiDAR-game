@@ -47,20 +47,31 @@ public class DrawCircles : MonoBehaviour
         _canStartRendering = true;
     }
     
-    public void JigglePoints()
+    public void JigglePoints(float t)
     { // very expensive method most likely - maybe possible to speed up?
         // It would be really cool if this happened in tune with some music
         var posData = new Vector3[_bufIndex];
         var colorData = new Vector3[_bufIndex];
         _posBuffer.GetData(posData);
         // _colorBuffer.GetData(colorData);
-        Vector3 affection = new Vector3(0, Random.Range(-0.05f,0.01f),0);
+        // Vector3 affection = new Vector3(0, -0.05f,0);
         for (int i = 0; i < _bufIndex; i++)
         {
             // Find out some fun way of actually doing this. Is it more fun to have them fall down, or vibrate, or something else?
-            posData[i] += affection;
+            posData[i] += Vector3.down * (Mathf.Pow(t,3) * Time.deltaTime * 100);
         }
         _posBuffer.SetData(posData, 0, 0, _bufIndex);
+    }
+
+    public void SetColor(float t)
+    {
+        var colorData = new Vector3[_bufIndex];
+        _colorBuffer.GetData(colorData);
+        for (int i = 0; i < _bufIndex; i++)
+        {
+            colorData[i] -= Vector3.one * t * Time.deltaTime;
+        }
+        _colorBuffer.SetData(colorData, 0, 0, _bufIndex);
     }
     
     void OnRenderObject()
