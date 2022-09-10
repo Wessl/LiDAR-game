@@ -94,6 +94,8 @@ public class Interactible : MonoBehaviour
         persistentAudio.Play();
         // Play animation
         transition.SetTrigger("Start");
+        // Fade out colors... 
+        GameObject.FindObjectOfType<DrawCircles>().DecreaseColorOverTime();
         // Wait
         yield return new WaitForSeconds(transitionTime);
         // Load scene

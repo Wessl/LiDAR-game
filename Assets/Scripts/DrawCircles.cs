@@ -11,6 +11,8 @@ public class DrawCircles : MonoBehaviour
     public Shader shader;
     private Material _material;
     private int _bufIndex;
+    private bool decreaseColorOverTime = false;
+    private float colorDecreaseTimer = 0;
 
     private bool _canStartRendering;
     private ComputeBuffer _posBuffer;
@@ -73,7 +75,22 @@ public class DrawCircles : MonoBehaviour
         }
         _colorBuffer.SetData(colorData, 0, 0, _bufIndex);
     }
-    
+
+
+    private void Update()
+    {
+        if (decreaseColorOverTime)
+        {
+            colorDecreaseTimer +=1;
+            SetColor(colorDecreaseTimer);
+        }
+    }
+
+    public void DecreaseColorOverTime()
+    {
+        decreaseColorOverTime = true;
+    }
+
     void OnRenderObject()
     {
         if (_canStartRendering)
