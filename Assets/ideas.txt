@@ -26,5 +26,5 @@ turn off sounds when going to next level
 AUDIOsources should also have a more interesting source than... nothing 
 
 finalization: add text that tells people in english that game is over at the same moment beat drops (you won, game is over :)
-intro thing that says "by the way this gots flashing lights)
+ability to press escape to quit
 other trhings like screenshots, credits for music, etc

@@ -14,7 +14,7 @@ public class NextSceneAfterTime : MonoBehaviour
 
     IEnumerator NextScene()
     {
-        yield return new WaitForSeconds(9);
+        yield return new WaitForSeconds(4);
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

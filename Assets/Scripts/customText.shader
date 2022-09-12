@@ -6,6 +6,7 @@ Properties {
         _TimeScaleValA ("Time Scale value A", float) = 0.25
         _TimeScaleValB ("Time Scale value B", float) = 0.1
         _AlphaTimeFadeFactor ("Alpha Time Fade Factor", float) = 1
+        _ChangeGB ("Should Green and Blue color channels change too", int) = 0
     }
 
     SubShader {
@@ -46,6 +47,7 @@ Properties {
             uniform float _TimeScaleValA;
             uniform float _TimeScaleValB;
             uniform float _AlphaTimeFadeFactor;
+            uniform int _ChangeGB;
 
             v2f vert (appdata_t v)
             {
@@ -65,6 +67,11 @@ Properties {
                 fixed4 color = i.color;
                 color.a *= (tex2D(_MainTex, i.texcoord).a - _AlphaTimeFadeFactor * _Time.y);
                 color.r += sin(_Time.y);
+                if (_ChangeGB)
+                {
+                    color.g += sin(_Time.y) + cos(_Time.x);
+                    color.b += cos(_Time.z);
+                }
                 return color;
             }
             ENDCG
