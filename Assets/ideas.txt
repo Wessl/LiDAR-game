@@ -24,5 +24,7 @@ court room again, should be harder to activate, but once it does, a tunnel shoul
 when you leave the room into the tunnel, door behind you should close
 turn off sounds when going to next level
 AUDIOsources should also have a more interesting source than... nothing 
-instead of just resetting everything... make the points fly away or something, then reset calmly over time... right now im doing color fading to black. which is great, but like. could be improved I think
-idk man just keep at it
+
+finalization: add text that tells people in english that game is over at the same moment beat drops (you won, game is over :)
+intro thing that says "by the way this gots flashing lights)
+other trhings like screenshots, credits for music, etc

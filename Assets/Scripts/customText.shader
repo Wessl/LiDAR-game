@@ -3,6 +3,9 @@ Shader "Unlit/customText"
 Properties {
         _MainTex ("Font Texture", 2D) = "white" {}
         _Color ("Text Color", Color) = (1,1,1,1)
+        _TimeScaleValA ("Time Scale value A", float) = 0.25
+        _TimeScaleValB ("Time Scale value B", float) = 0.1
+        _AlphaTimeFadeFactor ("Alpha Time Fade Factor", float) = 1
     }
 
     SubShader {
@@ -40,6 +43,9 @@ Properties {
             sampler2D _MainTex;
             uniform float4 _MainTex_ST;
             uniform fixed4 _Color;
+            uniform float _TimeScaleValA;
+            uniform float _TimeScaleValB;
+            uniform float _AlphaTimeFadeFactor;
 
             v2f vert (appdata_t v)
             {
@@ -50,14 +56,14 @@ Properties {
                 
                 o.color = v.color * _Color;
                 o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
-                o.texcoord.y += (cos((o.texcoord.x+0.1)*_Time.y*0.25) + sin((1-o.texcoord.x-0.2) * _Time.y*0.1)*0.5);
+                o.texcoord.y += (cos((o.texcoord.x+0.1)*_Time.y*_TimeScaleValA) + sin((1-o.texcoord.x-0.2) * _Time.y*_TimeScaleValB)*0.5);
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 color = i.color;
-                color.a *= tex2D(_MainTex, i.texcoord).a;
+                color.a *= (tex2D(_MainTex, i.texcoord).a - _AlphaTimeFadeFactor * _Time.y);
                 color.r += sin(_Time.y);
                 return color;
             }
