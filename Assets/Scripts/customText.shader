@@ -59,6 +59,11 @@ Properties {
                 o.color = v.color * _Color;
                 o.texcoord = TRANSFORM_TEX(v.texcoord,_MainTex);
                 o.texcoord.y += (cos((o.texcoord.x+0.1)*_Time.y*_TimeScaleValA) + sin((1-o.texcoord.x-0.2) * _Time.y*_TimeScaleValB)*0.5);
+                if (_Time.y > 60)
+                {
+                    o.texcoord.x += sin(o.texcoord.y * _Time.y * 3.14159 * 3.75);
+                    o.vertex.x += o.texcoord.x;
+                }
                 return o;
             }
 

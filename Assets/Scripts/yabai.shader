@@ -34,18 +34,7 @@ Shader "Unlit/yabai"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-
-            v2f vert (appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                o.uv = mul(o.vertex.x-0.5 + sin(o.uv.y*_Time.y*1.2)*cos(o.uv.x*_Time.y*0.4)+o.uv.x, fmod(_Time.y * 3.75, 1));
-                return o;
-            }
             
-            #define PI 3.14159265358979323846
-
             float2 rotate2D(float2 _st, float _angle){
                 _st -= 0.5;
                 _st =  mul(_st,float2x2(cos(_angle),-sin(_angle),
@@ -53,6 +42,23 @@ Shader "Unlit/yabai"
                 _st += 0.5;
                 return _st;
             }
+
+            v2f vert (appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv = mul(o.vertex.x-0.5 + sin(o.uv.y*_Time.y*1.2)*cos(o.uv.x*_Time.y*0.4)+o.uv.x, fmod(_Time.y * 3.75, 1));
+                if (_Time.y > 34.)
+                {
+                    o.uv = rotate2D(o.uv, _Time.z);
+                }
+                return o;
+            }
+            
+            #define PI 3.14159265358979323846
+
+            
 
             float2 tile(float2 _st, float _zoom){
                 _st *= _zoom;
@@ -75,6 +81,12 @@ Shader "Unlit/yabai"
 
                 // Divide the space in 4
                 st = tile(st,4);
+                if (_Time.y > 1060)
+                {
+                    st = i.uv;
+                    st = tile(st,1);
+                }
+                
 
                 // Use a matrix to rotate the space 45 degrees
                 st = rotate2D(st,pow(PI*0.25,sin(_Time.y*3.14)));
@@ -83,7 +95,7 @@ Shader "Unlit/yabai"
                 st+=frac(st.x*_Time.y);
                 color = box(st,float2(0.7,0.7),0.01);
                
-                color *= float3(sin(_Time.y*3.14159)+0.3,sin(_Time.y*1.716),cos(_Time.y/2.)*1.5+0.1);
+                color *= float3(sin(_Time.y*3.14159*_Time.z*0.1)+0.3,sin(_Time.y*1.716*(_Time.z*_Time.z)*0.1),cos(_Time.y/2.)*1.5+0.1);
                 // color = float3(st,0.0);
 
                 return float4(color,1.0);
