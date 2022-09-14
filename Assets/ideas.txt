@@ -7,8 +7,6 @@
 * since introducing the ability to do many points (not uploadSlow anymore) there is a bug where we go past the buffers index possiblity
 * think of new things to add
 start out as horror-puzzle. eventually unlock the outside, where colors of points match the objects, paint and see beautiful worlds as your reward
-as for the horror aspects, when you scan enough of a "red", instantly more points are unlocked on the body a loud sound should play
-* think about making the player move with physics instead... pro: makes it easier to move thru destroyed blocks, cons it makes it harder to see with lidar since old points will litter scene more
 for village level: door into house, to unlock something outsie, which leads to a drop down tunnel, go down, there is a room, wet water drops
 add footsteps sounds, depending on surface type
 omg, if I call drawCircles UploadCircleData from two different places... they can overwrite each other. fuck
@@ -18,13 +16,7 @@ maybe temporarily disable the scanner after having destroyed other points
 do something with the camera lens too 
 points moving around in space somewhát?= crazy shader effects(prefereably in the next level, dont do everything at on´ce)
 
-make the court level be orthograhpic. (or not, maybe after, or not) 
-just remember to make the court room activate differently, right now the zombie thing is just a temp
-court room again, should be harder to activate, but once it does, a tunnel should open up behind the elevated thing... and since it's a tunnel... you can use the kiki song. 
 when you leave the room into the tunnel, door behind you should close
 turn off sounds when going to next level
-AUDIOsources should also have a more interesting source than... nothing 
 
-finalization: add text that tells people in english that game is over at the same moment beat drops (you won, game is over :)
-ability to press escape to quit
 other trhings like screenshots, credits for music, etc

@@ -35,9 +35,9 @@ public class MouseLook : MonoBehaviour
     void Update()
     {
         // Input
-        if( Focused && lookEnabled )
+        if( Focused && lookEnabled)
             UpdateInput();
-        else if( Input.GetMouseButtonDown( 0 ) )
+        else if( Input.GetMouseButtonDown( 0 ) && lookEnabled )
             Focused = true;
         
     }
